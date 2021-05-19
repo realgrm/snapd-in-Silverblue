@@ -1,0 +1,13 @@
+[Unit]
+Description=Prepare mount points
+Before=remote-fs-pre.target
+Wants=remote-fs-pre.target
+
+[Service]
+Type=oneshot
+ExecStartPre=chattr -i /
+ExecStart=/bin/sh -c "[ -L '/snap' ] || ln -s '/var/mnt/snap' '/snap'"
+ExecStopPost=chattr +i /
+
+[Install]
+WantedBy=remote-fs.target
