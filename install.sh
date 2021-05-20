@@ -5,7 +5,6 @@ SCRIPT_FOLDER=/opt/bin/
 SERVICE_NAME=snapdSB.service
 SERVICE_FOLDER=/etc/systemd/system/
 
-
 sudo mkdir -p ${SCRIPT_FOLDER}
 sudo cp -b ${SCRIPT_FILE} ${SCRIPT_FOLDER}
 sudo chmod +x ${SCRIPT_FILE}
