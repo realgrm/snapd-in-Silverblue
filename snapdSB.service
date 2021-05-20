@@ -6,7 +6,7 @@ Wants=remote-fs-pre.target
 [Service]
 Type=oneshot
 ExecStartPre=chattr -i /
-ExecStart=/bin/sh -c "[ -L '/snap' ] || ln -s '/var/mnt/snap' '/snap'"
+ExecStart=/opt/bin/snapdSB.sh
 ExecStopPost=chattr +i /
 
 [Install]
