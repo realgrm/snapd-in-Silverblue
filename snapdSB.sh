@@ -8,8 +8,8 @@ snapfolder(){
 
 # bindmount /home
 homefolder(){
+([ -L '/home' ] && echo "the symlink /home will be replaced with a bind mount" && bindmounthome) || \
 ([ -d '/home' ] && echo "home folder already exists") || \
-([ -L '/home' ] && echo "the symlink /home will be replaced with a bind mount" && bindmounthome) ||
 (echo "the file named /home will be replaced with a bind mount" && bindmounthome)
 }
 
