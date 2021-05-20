@@ -14,7 +14,7 @@ echo "the file named /home will be replaced with a bind mount" && bindmounthome
 }
 
 bindmounthome(){
-  sudo rm -fr /home
+  sudo rm -f /home 2&>1
   sudo mkdir -p /home
   sudo mount --bind /var/home /home
 }
