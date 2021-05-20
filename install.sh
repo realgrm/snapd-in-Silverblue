@@ -12,7 +12,7 @@ sudo chmod +x ${SCRIPT_FILE}
 sudo cp -b ${SERVICE_NAME} ${SERVICE_FOLDER}
 sudo ln -bs ${SERVICE_FOLDER}${SERVICE_NAME} ${SERVICE_FOLDER}remote-fs.target.wants/${SERVICE_NAME}
 
-sudo systemctl daemon-reload
-sudo systemctl start ${SERVICE_NAME}
+# sudo systemctl daemon-reload
+# sudo systemctl start ${SERVICE_NAME}
 
 rpm-ostree install snapd
