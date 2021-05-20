@@ -1,6 +1,6 @@
 # snapd-in-Silverblue - Under Development
 
-This is an test based on some comments found in the Fedora Silverblue and snap repos
+This is a test based on some comments found in the Fedora Silverblue repo and snapcraft documentation
 
 Mostly based on 
 - https://github.com/coreos/rpm-ostree/issues/337#issuecomment-620069234
