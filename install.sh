@@ -15,4 +15,4 @@ sudo ln -bs ${SERVICE_FOLDER}${SERVICE_NAME} ${SERVICE_FOLDER}remote-fs.target.w
 # sudo systemctl daemon-reload
 # sudo systemctl start ${SERVICE_NAME}
 
-rpm-ostree install snapd
+# rpm-ostree install snapd
