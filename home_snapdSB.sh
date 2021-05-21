@@ -1,11 +1,5 @@
 #!/bin/env bash
 
-# create symlink /snap
-snapfolder(){
-([ -L '/snap' ] && echo "snap symlink already exists") || \
-(sudo ln -s '/var/mnt/snap' '/snap' && echo "symlink /snap created")
-}
-
 # bindmount /home
 homefolder(){
 ([ -L '/home' ] && echo "the symlink /home will be replaced with a bind mount" && bindmounthome) || \
@@ -26,6 +20,5 @@ passwdhome(){
   echo "/etc/passwd edited: /var/home replaced with /home"
 }
 
-snapfolder
 homefolder
 passwdhome
