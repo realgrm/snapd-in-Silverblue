@@ -19,4 +19,4 @@ ${SCRIPT_FOLDER}${SCRIPT_FILE}
 sudo systemctl daemon-reload
 sudo systemctl start ${SERVICE_NAME}
 
-# rpm-ostree install snapd
+rpm-ostree install snapd
