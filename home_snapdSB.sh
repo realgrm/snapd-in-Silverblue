@@ -15,9 +15,15 @@ bindmounthome(){
 
 # replace /var/home to /home in /etc/passwd
 passwdhome(){
-  sudo cp /etc/passwd /etc/passwd.backup
-  sudo sed -i 's|:/var/home|:/home|' /etc/passwd
-  echo "/etc/passwd edited: /var/home replaced with /home"
+  If grep -Fq ':/var/home' /etc/passwd
+  then
+    sudo cp /etc/passwd /etc/passwd.backup
+    echo "backup of /etc/passwd created"
+    sudo sed -i 's|:/var/home|:/home|' /etc/passwd
+    echo "/etc/passwd edited: /var/home replaced with /home"
+  else
+    echo "/etc/passwd already ok"
+  fi  
 }
 
 homefolder
