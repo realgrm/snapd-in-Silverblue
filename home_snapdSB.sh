@@ -15,7 +15,7 @@ bindmounthome(){
 
 # replace /var/home to /home in /etc/passwd
 passwdhome(){
-  If grep -Fq ':/var/home' /etc/passwd
+  if grep -Fq ':/var/home' /etc/passwd
   then
     sudo cp /etc/passwd /etc/passwd.backup
     echo "backup of /etc/passwd created"
