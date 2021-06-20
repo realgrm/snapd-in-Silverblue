@@ -1,6 +1,6 @@
 [Unit]
 Description=Prepare mount points
-Before=remote-fs-pre.target
+Before=home.mount
 Wants=remote-fs-pre.target
 
 [Service]

@@ -9,6 +9,8 @@ SERVICE_NAME=snapdSB.service
 read -n 1 -p "
 Will you use snap classic?
 This will replace the symlink /home with a bind mount
+Undo this it's not implemented.
+Only press y if you're really sure
 " classic
 
 case "$classic" in
