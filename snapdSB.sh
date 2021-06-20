@@ -43,7 +43,7 @@ passwdhome(){
 #_____________________________________________________#
 
 checksymlink(){
-	if [ $(readlink "/snap") == "/var/lib/snapd/snap" ]
+	if [[ $(readlink "/snap") == "/var/lib/snapd/snap" ]]
 	then echo 'snap symlink ok'
 	else symlinknok=1 && echo 'snap symlink not ok'
 	fi

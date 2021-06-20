@@ -1,0 +1,13 @@
+[Unit]
+Description=Prepare mount points
+Before=remote-fs-pre.target
+Wants=remote-fs-pre.target
+
+[Service]
+Type=oneshot
+ExecStartPre=chattr -i /
+ExecStart=sudo rm -rf /snap && sudo umount '/home' && sudo ln -sf /var/home /home
+ExecStopPost=sudo chattr +i /
+
+[Install]
+WantedBy=remote-fs.target
