@@ -20,7 +20,8 @@ ${SCRIPT_FOLDER}${SCRIPT_FILE}
 sudo systemctl daemon-reload
 sudo systemctl start ${SERVICE_NAME}
 
-sudo mkdir /var/mnt/snap
+sudo mkdir -p /var/mnt/snap
 
 if ! [[ $(rpm -qa | grep snapd) ]];
 then rpm-ostree install snapd; fi
+

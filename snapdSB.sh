@@ -1,15 +1,15 @@
 #!/bin/env bash
 
 SCRIPT_FOLDER=/opt/snapdSB/
-bindnotok=0
-symlinknok=0
+bindnotok=false
+symlinknok=false
 
 #_____________________________________________________#
 
 checkbindmount(){
 	if [ -d '/home' ]
 	then echo "bindmout of /home ok"
-	else bindnok=1 && echo "bindmout of /home not ok"
+	else bindnok=true && echo "bindmout of /home not ok"
 	fi
 }
 
@@ -20,7 +20,7 @@ bindmounthome(){
 	else echo "file /home will be replaced with a bind mount from /var/home"
 	fi
 
-	sudo rm -f /home 2&>${SCRIPT_FOLDER}/error.log
+	sudo rm -f /home | systemd-cat -t snapdSB.service -p info
 	sudo mkdir -p /home
 	sudo mount --bind /var/home /home
 }
@@ -43,15 +43,15 @@ passwdhome(){
 #_____________________________________________________#
 
 checksymlink(){
-	if [ $(readlink "/snap") = "/var/mnt/snap" ]
+	if [ $(readlink "/snap")=="/var/mnt/snap" ]
 	then echo 'snap symlink ok'
-	else symlinknok=1 && echo 'snap symlink not ok'
+	else symlinknok=true && echo 'snap symlink not ok'
 	fi
 }
 
 symlinksnap(){
 	echo "creating /var/mnt/snap symlink in /snap"
-	sudo ln -sf '/var/mnt/snap' '/snap'
+	sudo ln -sf '/var/mnt/snap' '/snap' | systemd-cat -t snapdSB.service -p info
 	checksymlink
 }
 
@@ -62,10 +62,9 @@ checksymlink
 
 passwdhome
 
-if [ bindnotok=1 || symlinknok=1 ]
+if [[ ${bindnotok} || ${symlinknok} ]]
 then sudo chattr -i /
-	if [ bindnotok=1 ]; then bindmounthome; fi
-	if [ symlinknok=1 ]; then symlinksnap; fi
+	if [ ${bindnotok} ]; then bindmounthome; fi
+	if [ ${symlinknok} ]; then symlinksnap; fi
 	sudo chattr +i /
 fi
-
