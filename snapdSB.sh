@@ -32,11 +32,11 @@ passwdhome(){
 	if grep -Fq ':/var/home' /etc/passwd
 	then
 		sudo cp /etc/passwd /etc/passwd.backup
-	echo "backup of /etc/passwd created"
+		echo "backup of /etc/passwd created"
 		sudo sed -i 's|:/var/home|:/home|' /etc/passwd
 		echo "/etc/passwd edited: /var/home replaced with /home"
-		else
-		echo "/etc/passwd already ok"
+	else
+		echo "/etc/passwd ok"
 	fi
 }
 
