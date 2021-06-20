@@ -17,8 +17,6 @@ case "$classic" in
 		sed -i 's|^checkbindmount$|#checkbindmount|' snapdSB.sh;;
 esac
 
-exit
-
 sudo mkdir -p ${SCRIPT_FOLDER}
 sudo cp -f * ${SCRIPT_FOLDER}
 sudo chmod +x ${SCRIPT_FOLDER}${SCRIPT_FILE}
