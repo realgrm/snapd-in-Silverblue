@@ -1,23 +1,23 @@
 #!/bin/env bash
 
 SCRIPT_FOLDER=/opt/snapdSB/
-bindnotok=false
-symlinknok=false
+bindnotok=0
+symlinknok=0
 
 #_____________________________________________________#
 
 checkbindmount(){
-	if ! [ -L '/home' ]
+	if [ -d '/home' ] && [ ! -L '/home' ]
 	then echo "bindmout of /home ok"
-	else bindnotok=true && echo "bindmout of /home not ok"
+	else bindnotok=1 && echo "bindmout of /home not ok"
 	fi
 }
 
 bindmounthome(){
 
 	if [ -L '/home' ]
-	then echo "symlink /home will be replaced with a bind mount from /var/home"
-	else echo "file /home will be replaced with a bind mount from /var/home"
+	then echo "symlink /home will be replaced with bind mount from /var/home"
+	else echo "bind mount will be created from /var/home to /home"
 	fi
 
 	sudo rm -f /home | systemd-cat -t snapdSB.service -p info
@@ -45,7 +45,7 @@ passwdhome(){
 checksymlink(){
 	if [ $(readlink "/snap") == "/var/lib/snapd/snap" ]
 	then echo 'snap symlink ok'
-	else symlinknok=true && echo 'snap symlink not ok'
+	else symlinknok=1 && echo 'snap symlink not ok'
 	fi
 }
 
@@ -57,15 +57,16 @@ symlinksnap(){
 
 #_____________________________________________________#
 
-# If its needed to run snaps in classic mode this will be necessary and will need to be uncommented
 #checkbindmount
 checksymlink
 
 passwdhome
 
-if [ $bindnotok == "true" ] || [ $symlinknok == "true" ]
-then sudo chattr -i /
-	if [ ${bindnotok} == "true" ]; then bindmounthome; fi
-	if [ ${symlinknok} == "true" ]; then symlinksnap; fi
+if (( $bindnotok + $symlinknok ))
+then
+	sudo chattr -i /
+	if (( ${bindnotok} )); then bindmounthome; fi
+	if (( ${symlinknok} )); then symlinksnap; fi
 	sudo chattr +i /
 fi
+

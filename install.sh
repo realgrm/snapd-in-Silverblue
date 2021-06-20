@@ -6,6 +6,18 @@ SCRIPT_FILE=snapdSB.sh
 SERVICE_FOLDER=/etc/systemd/system/
 SERVICE_NAME=snapdSB.service
 
+read -n 1 -p "
+Will you use snap classic?
+This will replace the symlink /home with a bind mount
+" classic
+case "$classic" in
+	[yY][eE][sS]|[yY])
+		sed -i 's|^#checkbindmount$|checkbindmount|' snapdSB.sh;;
+	*)
+		sed -i 's|^checkbindmount$|#checkbindmount|' snapdSB.sh;;
+esac
+
+exit
 
 sudo mkdir -p ${SCRIPT_FOLDER}
 sudo cp -f * ${SCRIPT_FOLDER}
