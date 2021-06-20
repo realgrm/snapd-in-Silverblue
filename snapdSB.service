@@ -5,10 +5,8 @@ Wants=remote-fs-pre.target
 
 [Service]
 Type=oneshot
-ExecStartPre=chattr -i /
-ExecStart=/bin/sh -c "([ -L '/snap' ] && echo 'snap symlink already exists') || \
-(sudo ln -s '/var/mnt/snap' '/snap' && echo 'symlink /snap created')"
-ExecStopPost=chattr +i /
+ExecStart=sudo /opt/snapdSB/snapdSB.sh
+ExecStopPost=sudo chattr +i /
 
 [Install]
 WantedBy=remote-fs.target
