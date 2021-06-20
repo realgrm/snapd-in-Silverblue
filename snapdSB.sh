@@ -57,12 +57,14 @@ symlinksnap(){
 
 #_____________________________________________________#
 
-checkbindmount
+# I couldn't find an app that didn't work when /var/home is not bind mounted to /home
+# so the check and the bind mount is not executed and bindnotok is always false
+#checkbindmount
 checksymlink
 
 passwdhome
 
-if [[ ${bindnotok} || ${symlinknok} ]]
+if [ $bindnotok == "true" ] || [ $symlinknok == "true" ]
 then sudo chattr -i /
 	if [ ${bindnotok} ]; then bindmounthome; fi
 	if [ ${symlinknok} ]; then symlinksnap; fi

@@ -15,12 +15,9 @@ sudo cp -f ${SERVICE_NAME} ${SERVICE_FOLDER}
 sudo ln -sf ${SERVICE_FOLDER}${SERVICE_NAME} \
 	${SERVICE_FOLDER}remote-fs.target.wants/${SERVICE_NAME}
 
-${SCRIPT_FOLDER}${SCRIPT_FILE}
-
-sudo systemctl daemon-reload
-sudo systemctl start ${SERVICE_NAME}
-
 sudo mkdir -p /var/mnt/snap
+
+${SCRIPT_FOLDER}${SCRIPT_FILE}
 
 if ! [[ $(rpm -qa | grep snapd) ]];
 then rpm-ostree install snapd; fi
