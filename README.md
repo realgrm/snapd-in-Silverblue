@@ -11,7 +11,8 @@ Mostly based on
 Based on some tests on VM, it's working.  
 
 Bind mount /home with /var/home is necessary to run snap in classic mode.  
-But if applied, I **couldn't find a way to undo it** in a script.  
+But if applied, I don't know the full implications of it and 
+I **couldn't find a way to undo it** in a script.  
 
 If you want to test, it's recommended do it in a VM
 
