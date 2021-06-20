@@ -10,6 +10,7 @@ read -n 1 -p "
 Will you use snap classic?
 This will replace the symlink /home with a bind mount
 " classic
+
 case "$classic" in
 	[yY][eE][sS]|[yY])
 		sed -i 's|^#checkbindmount$|checkbindmount|' snapdSB.sh;;
