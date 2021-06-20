@@ -66,7 +66,7 @@ passwdhome
 
 if [ $bindnotok == "true" ] || [ $symlinknok == "true" ]
 then sudo chattr -i /
-	if [ ${bindnotok} ]; then bindmounthome; fi
-	if [ ${symlinknok} ]; then symlinksnap; fi
+	if [ ${bindnotok} == "true" ]; then bindmounthome; fi
+	if [ ${symlinknok} == "true" ]; then symlinksnap; fi
 	sudo chattr +i /
 fi
