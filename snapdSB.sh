@@ -6,6 +6,7 @@ symlinknok=0
 
 #_____________________________________________________#
 
+# check if bind mount in /home is already applied
 checkbindmount(){
 	if [ -d '/home' ] && [ ! -L '/home' ]
 	then echo "bindmout of /home ok"
@@ -13,6 +14,7 @@ checkbindmount(){
 	fi
 }
 
+# replace symlink in /home with bind mount
 bindmounthome(){
 
 	if [ -L '/home' ]
@@ -42,6 +44,7 @@ passwdhome(){
 
 #_____________________________________________________#
 
+# check if symlink in /snap exists
 checksymlink(){
 	if [[ $(readlink "/snap") == "/var/lib/snapd/snap" ]]
 	then echo 'snap symlink ok'
@@ -49,6 +52,7 @@ checksymlink(){
 	fi
 }
 
+# create symlink in /snap
 symlinksnap(){
 	echo "creating /var/lib/snapd/snap symlink in /snap"
 	sudo ln -sf '/var/lib/snapd/snap' '/snap' | systemd-cat -t snapdSB.service -p info
@@ -57,11 +61,12 @@ symlinksnap(){
 
 #_____________________________________________________#
 
+#if comment, steps bellow will not be checked and applied
 #checkbindmount
 checksymlink
-
 passwdhome
 
+# only unlock / if it's needed
 if (( $bindnotok + $symlinknok ))
 then
 	sudo chattr -i /
