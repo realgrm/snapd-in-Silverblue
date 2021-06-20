@@ -7,9 +7,9 @@ symlinknok=false
 #_____________________________________________________#
 
 checkbindmount(){
-	if [ -d '/home' ]
+	if ! [ -L '/home' ]
 	then echo "bindmout of /home ok"
-	else bindnok=true && echo "bindmout of /home not ok"
+	else bindnotok=true && echo "bindmout of /home not ok"
 	fi
 }
 
@@ -57,8 +57,7 @@ symlinksnap(){
 
 #_____________________________________________________#
 
-# I couldn't find an app that didn't work when /var/home is not bind mounted to /home
-# so the check and the bind mount is not executed and bindnotok is always false
+# If its needed to run snaps in classic mode this will be necessary and will need to be uncommented
 #checkbindmount
 checksymlink
 
