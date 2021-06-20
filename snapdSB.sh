@@ -43,15 +43,15 @@ passwdhome(){
 #_____________________________________________________#
 
 checksymlink(){
-	if [ $(readlink "/snap")=="/var/mnt/snap" ]
+	if [ $(readlink "/snap") == "/var/lib/snapd/snap" ]
 	then echo 'snap symlink ok'
 	else symlinknok=true && echo 'snap symlink not ok'
 	fi
 }
 
 symlinksnap(){
-	echo "creating /var/mnt/snap symlink in /snap"
-	sudo ln -sf '/var/mnt/snap' '/snap' | systemd-cat -t snapdSB.service -p info
+	echo "creating /var/lib/snapd/snap symlink in /snap"
+	sudo ln -sf '/var/lib/snapd/snap' '/snap' | systemd-cat -t snapdSB.service -p info
 	checksymlink
 }
 
