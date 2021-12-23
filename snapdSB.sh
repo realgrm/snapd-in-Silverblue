@@ -22,9 +22,9 @@ bindmounthome(){
 	else echo "bind mount will be created from /var/home to /home"
 	fi
 
-	sudo rm -f /home | systemd-cat -t snapdSB.service -p info
-	sudo mkdir -p /home
-	sudo mount --bind /var/home /home
+	rm -f /home | systemd-cat -t snapdSB.service -p info
+	mkdir -p /home
+	mount --bind /var/home /home
 }
 
 #_____________________________________________________#
@@ -33,9 +33,9 @@ bindmounthome(){
 passwdhome(){
 	if grep -Fq ':/var/home' /etc/passwd
 	then
-		sudo cp /etc/passwd /etc/passwd.backup
+		cp /etc/passwd /etc/passwd.backup
 		echo "backup of /etc/passwd created"
-		sudo sed -i 's|:/var/home|:/home|' /etc/passwd
+		sed -i 's|:/var/home|:/home|' /etc/passwd
 		echo "/etc/passwd edited: /var/home replaced with /home"
 	else
 		echo "/etc/passwd ok"
@@ -55,7 +55,7 @@ checksymlink(){
 # create symlink in /snap
 symlinksnap(){
 	echo "creating /var/lib/snapd/snap symlink in /snap"
-	sudo ln -sf '/var/lib/snapd/snap' '/snap' | systemd-cat -t snapdSB.service -p info
+	ln -sf '/var/lib/snapd/snap' '/snap' | systemd-cat -t snapdSB.service -p info
 	checksymlink
 }
 
@@ -69,9 +69,9 @@ passwdhome
 # only unlock / if it's needed
 if (( $bindnotok + $symlinknok ))
 then
-	sudo chattr -i /
+	chattr -i /
 	if (( ${bindnotok} )); then bindmounthome; fi
 	if (( ${symlinknok} )); then symlinksnap; fi
-	sudo chattr +i /
+	chattr +i /
 fi
 
