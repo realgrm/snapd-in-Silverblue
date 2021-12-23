@@ -22,17 +22,17 @@ case "$classic" in
 esac
 
 #install script
-sudo mkdir -p ${SCRIPT_FOLDER}
-sudo cp -f * ${SCRIPT_FOLDER}
-sudo chmod +x ${SCRIPT_FOLDER}${SCRIPT_FILE}
+mkdir -p ${SCRIPT_FOLDER}
+cp -f * ${SCRIPT_FOLDER}
+chmod +x ${SCRIPT_FOLDER}${SCRIPT_FILE}
 
 # create service to run on start up to make sure changes are mantained
-sudo cp -f ${SERVICE_NAME} ${SERVICE_FOLDER}
-sudo ln -sf ${SERVICE_FOLDER}${SERVICE_NAME} \
+cp -f ${SERVICE_NAME} ${SERVICE_FOLDER}
+ln -sf ${SERVICE_FOLDER}${SERVICE_NAME} \
 	${SERVICE_FOLDER}remote-fs.target.wants/${SERVICE_NAME}
 
 # make snap symlink target
-sudo mkdir -p /var/lib/snapd/snap
+mkdir -p /var/lib/snapd/snap
 
 # run script
 ${SCRIPT_FOLDER}${SCRIPT_FILE}
