@@ -19,7 +19,7 @@ Mostly based on
 Based on some tests on VM
 - install.sh: it's working
 - snapdSB.sh: it's woking
-- snapdSB.service: not working
+- snapdSB.service: it's working
 - uninstall.sh: working
 - snapdSB_uninstall.service: not working
 
